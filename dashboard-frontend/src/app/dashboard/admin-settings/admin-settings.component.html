@@ -1,0 +1,176 @@
+<div class="container" *ngIf="isUserAdmin">
+  <div class="card w-75 mx-auto my-2" *ngFor="let user of users_list">
+    <div class="card-header d-flex justify-content-between">
+      <h5>{{ user.username }}</h5>
+      <button type="button" class="btn btn-primary" (click)="showModal(user)">
+        Delete
+      </button>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <!-- <li class="list-group-item">Username : {{ user.username }}</li> -->
+        <li class="list-group-item">Email : {{ user.email }}</li>
+        <li class="list-group-item">
+          Password : {{ user.hardcoded_password }}
+        </li>
+        <li class="list-group-item">Is Root User: {{ user.is_root }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  style="position: fixed; bottom: 30px; right: 30px"
+  (click)="showAddUserModal()"
+>
+  Add New User
+</button>
+
+<!-- model for add new user -->
+<!-- The Modal -->
+<div class="modal fade" id="addUserModel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add New User</h4>
+        <button type="button" class="close" (click)="hideAddUserModal()">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body p-3">
+        <div *ngIf="showdangerAlert" class="alert alert-danger" role="alert">
+          {{ alertValue }}
+        </div>
+        <div *ngIf="showsuccessAlert" class="alert alert-success" role="alert">
+          {{ alertValue }}
+        </div>
+        <form #addUser="ngForm" (ngSubmit)="onClickSubmit(addUser)">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Username"
+              name="username"
+              ngModel
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              name="email"
+              ngModel
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              name="password"
+              ngModel
+            />
+          </div>
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="exampleCheck1"
+              name="is_root"
+              ngModel
+              value="false"
+            />
+            <label class="form-check-label" for="exampleCheck1"
+              >Grant Root User</label
+            >
+          </div>
+          <button type="button" class="btn btn-primary btn-block" type="submit">
+            Add User
+          </button>
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="hideAddUserModal()"
+        >
+          Close
+        </button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button
+          type="button"
+          id="close-modal-add-user"
+          data-dismiss="modal"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model for confimation -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Are You Sure Delete This User</h4>
+        <button type="button" class="close" (click)="hideModal()">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Username : {{ modal_user_data.username }}
+          </li>
+          <li class="list-group-item">Email : {{ modal_user_data.email }}</li>
+          <li class="list-group-item">
+            Password : {{ modal_user_data.hardcoded_password }}
+          </li>
+          <li class="list-group-item">
+            Is Root User: {{ modal_user_data.is_root }}
+          </li>
+        </ul>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="delete_user()">
+          Yes
+        </button>
+        <button type="button" class="btn btn-danger" (click)="hideModal()">
+          Close
+        </button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button
+          type="button"
+          id="close-modal"
+          data-dismiss="modal"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

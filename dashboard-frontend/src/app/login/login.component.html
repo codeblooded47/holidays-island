@@ -1,0 +1,42 @@
+<div class="container d-flex" style="height: 100vh">
+  <div style="width: 100%; max-width: 500px; padding: 15px; margin: auto">
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      {{ errorMassage }}
+    </div>
+    <!-- Default form login -->
+    <form
+      class="text-center border border-light p-5"
+      #userlogin="ngForm"
+      (ngSubmit)="onClickSubmit(userlogin.value)"
+    >
+      <p class="h4 mb-4">Sign in</p>
+
+      <!-- Email -->
+      <input
+        type="text"
+        id="defaultLoginFormEmail"
+        class="form-control mb-4"
+        placeholder="Enter username"
+        name="username"
+        ngModel
+      />
+
+      <!-- Password -->
+      <input
+        type="password"
+        id="defaultLoginFormPassword"
+        class="form-control mb-4"
+        placeholder="Password"
+        name="password"
+        ngModel
+      />
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
+        Sign in
+      </button>
+      <!-- Sign in button -->
+    </form>
+  </div>
+
+  <!-- Default form login -->
+</div>

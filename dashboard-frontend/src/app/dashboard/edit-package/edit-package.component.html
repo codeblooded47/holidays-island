@@ -1,0 +1,410 @@
+<!-- <section size="A4">
+
+  <div class="pageOne">
+    <img src="../assets/img/newlogo.png" />
+    <div class="intro">
+      <p>نرحب بك في جزيرة العطلات للسياحة الاسم الرائد في سياحة الجزر</p>
+
+      <p>نتطلع دائما لتقديم أرقى الخدمات لكم لرحلة لا تنسى</p>
+      <div class="points">
+        <ul>
+          <li>فريق عمل سعودي</li>
+          <li>أرقى خدمة بسعر منافس</li>
+          <li>دعم على مدار الساعة لعملائنا</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> -->
+<div class="container package-container">
+  <div class="pageThree">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="container">
+        <div class="form-group">
+          <label class="CompName" for="name">Package Name : </label>
+          <input type="text" id="name" class="form-control d-inline" placeholder="Package Name" name="name"
+            formControlName="name" required />
+        </div>
+      </div>
+
+      <div formArrayName="Offers">
+        <div style="margin-top: 5px; margin-bottom: 5px"
+          *ngFor="let Offer of myForm.get('Offers')['controls']; let i = index">
+          <fieldset>
+            <legend>
+              <div class="container">
+                <!-- <div class="row"> -->
+                <!-- <div class="col-6"> -->
+                <!-- <h4>Offer</h4> -->
+                <button type="button" class="btn btn-primary mr-3" (click)="deleteCity(i)">
+                  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                  Delete This Offer
+                </button>
+
+                <!-- </div> -->
+                <!-- <div class="col-6"> -->
+                <button type="button" class="btn btn-primary" (click)="addNewAddressLine(Offer.controls.Hotels)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  Add New Hotel
+                </button>
+              </div>
+              <!-- </div> -->
+              <!-- </div> -->
+            </legend>
+            <div [formGroupName]="i">
+              <!-- <div>
+                <div class="container">
+                  <div class="form-row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="Offer">Offers {{ i + 1 }}:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Offer"
+                          placeholder="Enter the display name, the golden display, for example     "
+                          name="type"
+                          formControlName="Offer"
+                          style="margin-right: 5px"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <button
+                          style="margin-right: 5px"
+                          type="button"
+                          class="btn btn-success btn-sm"
+                          (click)="addNewAddressLine(Offer.controls.Hotels)"
+                        >
+                          <span
+                            class="glyphicon glyphicon-plus"
+                            aria-hidden="true"
+                          ></span>
+                          اضافة فندق جديد
+                        </button>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div> -->
+              <div>
+                <div>
+                  <div formArrayName="Hotels">
+                    <div *ngFor="
+                        let lines of Offer.get('Hotels').controls;
+                        let j = index
+                      ">
+                      <div [formGroupName]="j">
+                        <div>
+                          <div class="container">
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">Name of the country
+                                  </label>
+                                  <input formControlName="countryName" class="form-control" type="text"
+                                    placeholder="Enter Country Name" id="address" name="address" list="listscon"
+                                    (ngModelChange)="onCountryChange($event)" />
+                                  <datalist id="listscon">
+                                    <option *ngFor="let country of country_list">
+                                      {{ country.name }}
+                                    </option>
+                                  </datalist>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">the hotel name :</label>
+                                  <input formControlName="HotelName" class="form-control" type="text"
+                                    placeholder="the hotel name" id="address" name="address" list="lists" />
+                                  <datalist id="lists">
+                                    <option *ngFor="let hotel of hotels_list">
+                                      {{ hotel.name }}
+                                    </option>
+                                  </datalist>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Number of nights
+                                  </label>
+                                  <input formControlName="NightNumber" class="form-control" type="number"
+                                    placeholder="Enter Number of nights" id="address" name="address" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">Room Type</label>
+                                  <input formControlName="RoomType" class="form-control" type="text"
+                                    placeholder="Enter Room Type" id="address" name="address" list="lists1" />
+                                  <datalist id="lists1">
+                                    <option *ngFor="let room of rooms_list">
+                                      {{ room.name }}
+                                    </option>
+                                  </datalist>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">Date</label>
+                                  <input formControlName="RegisterDate" class="form-control" type="date"
+                                    placeholder="Enter Date" id="address" name="address" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">Price </label>
+                                  <input formControlName="price" class="form-control" type="number" placeholder="$$"
+                                    id="address" name="address" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">Foods :</label>
+                                  <select class="form-control" formControlName="foods" placeholder="Food">
+                                    <option *ngFor="let meal of meals_list">
+                                      {{ meal.name }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- <label
+                            style="margin-right: 13px"
+                            class="col-form-label"
+                            for="emailId"
+                            >العرض يشمل على :</label
+                          >
+                          <select formControlName="teps1" style="width: 43%">
+
+                          </select> -->
+                          <!-- start -->
+                          <div class="container">
+                            <!-- from 1 -->
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps1" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps2" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                            </div>
+                            <!-- form 2 -->
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps3" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps4" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                            </div>
+                            <!-- form 3 -->
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps5" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps6" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- form 4 -->
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps7" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps8" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps9" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label for="emailId">
+                                    Add special services:</label>
+                                  <input formControlName="teps10" class="form-control" type="text"
+                                    placeholder="Add special services" id="address" name="address" list="listsMore" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end -->
+                          <datalist id="listsMore">
+                            <option *ngFor="let inclusion of inclusions_list">
+                              {{ inclusion.name }}
+                            </option>
+                          </datalist>
+
+                          <!-- <label
+                            style="margin-right: 5px"
+                            class="col-form-label"
+                            for="emailId"
+                          >
+                            Add a picture for a new hote</label
+                          > -->
+                          <input formControlName="image1" class="form-control d-none" style="
+                              margin-right: 5px;
+                              margin-top: 20px;
+                              width: 74%;
+                            " type="text" placeholder=" Add Image Link " id="address" name="address" />
+
+                          <!-- <datalist id="imageList">
+                            <option value="Aantara">Aantara Hotel</option>
+                            <option value="Angsana">Angsana Hotel</option>
+                            <option value="Bubbls">Bubbls Hotel</option>
+                            <option value="Constanc">Constanc Hotel</option>
+                            <option value="Four Season">Four Season Hotel</option>
+                            <option value="Hertiage Le">Hertiage Le Hotel</option>
+                            <option value="Hilton">Hilton Hotel</option>
+                            <option value="Labordineh">Labordineh Hotel</option>
+                            <option value="Long Beach">Long Beach Hotel</option>
+                            <option value="Lux Bell Mar">Lux Bell Mar Hotel</option>
+                            <option value="Lux Grand">Lux Grand Hotel</option>
+                            <option value="Maradiva">Maradiva Hotel</option>
+                            <option value="Margury Villa">Margury Villa Hotel</option>
+                            <option value="One&Only">One&Only Hotel</option>
+                            <option value="Outrigger">Outrigger Hotel</option>
+                            <option value="Raddison Blue">Raddison Blue Hotel</option>
+                            <option value="Radisson Azuri">Radisson Azuri Hotel</option>
+                            <option value="Shangrilaa">Shangrilaa Hotel</option>
+                            <option value="Shanti Maurice">Shanti Maurice Hotel</option>
+                            <option value="So Sofitel">So Sofitel Hotel</option>
+                            <option value="Sofitel Imperial">Sofitel Imperial Hotel</option>
+                            <option value="Suger Beach">Suger Beach Hotel</option>
+                            <option value="Westin">Westin Hotel</option>
+
+
+                          </datalist> -->
+                          <div class="container">
+                            <button type="button" class="btn btn-primary" (click)="
+                                deleteAddressLine(Offer.controls.Hotels, j)
+                              ">
+                              <span class="glyphicon glyphicon-minus" aria-hidden="true">Delete This Hotel</span>
+                            </button>
+                          </div>
+
+                          <hr />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="container d-flex justify-content-between mb-4">
+        <!-- <div class="row"> -->
+        <!-- <div class="col-3"> -->
+        <button type="submit" class="btn btn-primary">Send</button>
+        <!-- </div> -->
+        <!-- <div class="col-3"> -->
+        <button type="button" class="btn btn-primary" *ngIf="myForm.valid">
+          الغاء
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addNewCity()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Add New Offer
+        </button>
+        <!-- </div> -->
+        <!-- <div class="col-3"> -->
+        <button routerLink="/offers" class="btn btn-primary">
+          Go to the previous offers page
+        </button>
+        <!-- </div> -->
+        <!-- <div class="col-3"> -->
+        <!-- <button type="button" class="btn btn-primary" (click)="deleteDB()">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Delete the database
+        </button> -->
+        <!-- </div> -->
+        <!-- </div> -->
+      </div>
+      <!-- <button type="submit" class="btn btn-success">ارسال</button>
+      <button type="button" class="btn btn-basic" *ngIf="myForm.valid">
+        الغاء
+      </button>
+      <button
+        style="margin-top: 5px; margin-bottom: 5px"
+        type="button"
+        class="btn btn-success btn-sm"
+        (click)="addNewCity()"
+      >
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> اضف
+        عروض جديدة
+      </button>
+      <button routerLink="/offers" class="btn btn-success btn-sm">
+        الذهاب لصفحة العروض السابقة
+      </button>
+      <button
+        style="margin-top: 5px; margin-bottom: 5px"
+        type="button"
+        class="btn btn-basic btn-sm"
+        (click)="deleteDB()"
+      >
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> حذف
+        قاعدة البيانات
+      </button> -->
+    </form>
+  </div>
+</div>
+
+<section size="A44"></section>

@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~bootstrap/scss/bootstrap.scss";
+$primary-color: #488fa2;
+$secondary-color: #004e63;
+$tertiary-color: #a4ddfb;
+body {
+  font-family: "Roboto", sans-serif;
+}
+.btn-primary {
+  background-color: $primary-color;
+  border-color: #fff;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: $secondary-color;
+  border-color: #fff;
+}
+.package-container {
+  background: $tertiary-color;
+  padding: 20px;
+  border: solid 1px;
+}
+.form-control {
+  background-color: #fff;
+  border: 0px;
+  border-radius: 0px;
+  margin-bottom: 30px;
+}
+
+// #wrapper {
+//   overflow-x: hidden;
+// }
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}

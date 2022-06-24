@@ -1,0 +1,187 @@
+<div class="container">
+  <div class="card w-75 mx-auto my-2" *ngFor="let hotel of hotels_list">
+    <div class="card-header d-flex justify-content-between">
+      <h5>{{ hotel.name }}</h5>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="remove_Hotels(hotel._id)"
+      >
+        Delete
+      </button>
+    </div>
+    <div class="card-body d-lg-flex">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Hotel Name : {{ hotel.name }}</li>
+        <li class="list-group-item">Country Name : {{ hotel.country }}</li>
+        <!-- <li class="list-group-item">Image Url: {{ hotel.image_url }}</li> -->
+      </ul>
+      <img
+        class="card-img-bottom w-50 ml-2 m-auto d-flex"
+        [src]="sanitizeUrl(hotel.image_url)"
+        alt="Card image cap"
+      />
+    </div>
+  </div>
+</div>
+<button
+  type="button"
+  class="btn btn-primary"
+  style="position: fixed; bottom: 30px; right: 30px"
+  (click)="showAddHotelModal()"
+>
+  Add New Hotel
+</button>
+
+<!-- model for add new user -->
+<!-- The Modal -->
+<div class="modal fade" id="addUserModel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Hotel</h4>
+        <button type="button" class="close" (click)="hideAddHotelModel()">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body p-3">
+        <div *ngIf="showdangerAlert" class="alert alert-danger" role="alert">
+          {{ alertValue }}
+        </div>
+        <div *ngIf="showsuccessAlert" class="alert alert-success" role="alert">
+          {{ alertValue }}
+        </div>
+        <form #addHotel="ngForm" (ngSubmit)="onClickSubmit(addHotel)">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Hotel</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Enter Hotel Name"
+              name="name"
+              ngModel
+            />
+          </div>
+          <!-- <div class="form-group">
+            <label for="exampleInputEmail1">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Country Name"
+              name="country"
+              ngModel
+            />
+          </div> -->
+
+          <div class="form-group">
+            <label for="inputState">State</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter Country Name"
+              name="country"
+              ngModel
+              list="country_list"
+            />
+            <datalist id="country_list">
+              <option *ngFor="let country of country_list">
+                {{ country.name }}
+              </option>
+            </datalist>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Upload Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              name="sampleFile"
+              ngModel
+              (change)="getFiles($event)"
+            />
+          </div>
+          <button type="button" class="btn btn-primary btn-block" type="submit">
+            Add Hotel
+          </button>
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <!-- <button
+          type="button"
+          class="btn btn-danger"
+          (click)="hideAddUserModal()"
+        >
+          Close
+        </button> -->
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button
+          type="button"
+          id="close-modal-add-user"
+          data-dismiss="modal"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- model for confimation -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Are You Sure Delete This User</h4>
+        <!-- <button type="button" class="close" (click)="hideModal()">
+          &times;
+        </button> -->
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!-- <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Username : {{ modal_user_data.username }}
+          </li>
+          <li class="list-group-item">Email : {{ modal_user_data.email }}</li>
+          <li class="list-group-item">
+            Password : {{ modal_user_data.hardcoded_password }}
+          </li>
+          <li class="list-group-item">
+            Is Root User: {{ modal_user_data.is_root }}
+          </li>
+        </ul> -->
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary" (click)="delete_user()">
+          Yes
+        </button>
+        <button type="button" class="btn btn-danger" (click)="hideModal()">
+          Close
+        </button> -->
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button
+          type="button"
+          id="close-modal"
+          data-dismiss="modal"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

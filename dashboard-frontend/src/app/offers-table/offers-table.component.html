@@ -1,0 +1,223 @@
+<a href="http://pdf.holidays-island.com/download/get/{{ id }}?page_count={{
+  totalprintpagecount
+}}&filename={{ pdfName }}.pdf&open=true" target="_blank" type="button" class="btn btn-primary print-btn"
+  *ngIf="showDownload" style="
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  background: #b4ddf7;
+  padding: 7px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 17px;
+  width: 14%;
+  border-color: #7d7d7d;
+  text-align: center;
+  text-anchor: none;
+  text-decoration: none !important;
+  color: #000;
+">
+  Open Pdf
+</a>
+<a href="http://pdf.holidays-island.com/download/get/{{ id }}?page_count={{
+  totalprintpagecount
+}}&filename={{ pdfName }}.pdf" target="_blank" type="button" class="btn btn-primary print-btn" *ngIf="showDownload"
+  style="
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #b4ddf7;
+  padding: 7px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 17px;
+  width: 14%;
+  border-color: #7d7d7d;
+  text-align: center;
+  text-anchor: none;
+  text-decoration: none !important;
+  color: #000;
+">
+  Download Pdf
+</a>
+<section size="A4">
+  <div class="pageOne">
+    <img src="../assets/img/newlogo2.png"
+      style="object-fit: contain; height:25%;width:70%; margin-top: 17%; margin-bottom:0px" />
+    <div class="intro">
+      <p>نرحب بك في جزيرة العطلات للسياحة الاسم الرائد في سياحة الجزر</p>
+
+      <p>نتطلع دائما لتقديم أرقى الخدمات لكـم لرحلة لا تنسى</p>
+      <div class="points">
+        <ul>
+          <li>فريق عمل سعودي</li>
+          <li>أرقى خدمة بسعر منافس</li>
+          <li>دعم على مدار الساعة لعملائنا</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngFor="let item of d; let i = index">
+  <div *ngFor="let offer of item; let j = index">
+    <section size="A44">
+      <div class="pageThree">
+        <div class="container1">
+          <!-- <p id="tit" style="margin-top: 10% ; margin-right: 3%;" >
+        " عــــــرض أسعـــــار و خطــة سياحيــة من شركــــة - "
+        {{ companyName }}
+         </p> -->
+          <table id="customers" class="table table-bordered" style="width: 98%; float: right; margin-right: 1%">
+            <div>
+              <caption id="name" style="caption-side: up">
+                <p id="nam">
+                  {{ offer["Offer"] }}
+                </p>
+              </caption>
+
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th>اسم المنتجع</th>
+                  <th>اسم الدولة</th>
+                  <th>الليالي</th>
+                  <th>الغرفة</th>
+                  <th>ت.الدخول</th>
+                  <!-- <th>السعر</th> -->
+                  <th>الوجبات</th>
+                  <!-- <th style="max-width: 0%">ما يشمل العرض</th> -->
+                </tr>
+              </thead>
+              <!-- {{item.Offers[i] | json}} -->
+              <tbody>
+                <tr *ngFor="let hotel of offer.Hotels; let e = index">
+                  <th scope="row">{{ e + 1 }}</th>
+                  <td style="width: 30%; word-break: break-word">
+                    {{ hotel.HotelName }}
+                  </td>
+                  <td style="width: 13%">{{ hotel.countryName }}</td>
+                  <td>{{ hotel.NightNumber }}</td>
+                  <td style="width: 25%">{{ hotel.RoomType }}</td>
+                  <td style="width: 14%">{{ hotel.RegisterDate }}</td>
+                  <!-- <td>{{ hotel.price }}</td> -->
+                  <td style="width: 15%">{{ hotel.foods }}</td>
+                  <!-- <td style="width: 15%">{{ hotel.teps }}</td> -->
+                </tr>
+              </tbody>
+            </div>
+          </table>
+
+          <p style="font-size: 25px">يشمل العرض على</p>
+
+          <table class="tipsTable">
+            <tbody>
+              <tr>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps1 === ''">
+                  {{ offer.Hotels[0].teps1 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps1 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps1 }}
+                </th>
+
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps2 === ''">
+                  {{ offer.Hotels[0].teps2 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps2 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>{{ offer.Hotels[0].teps2 }}
+                </th>
+              </tr>
+              <tr>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps3 === ''">
+                  {{ offer.Hotels[0].teps3 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps3 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>{{ offer.Hotels[0].teps3 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps4 === ''">
+                  {{ offer.Hotels[0].teps4 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps4 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps4 }}
+                </th>
+              </tr>
+              <tr>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps5 === ''">
+                  {{ offer.Hotels[0].teps5 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps5 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>{{ offer.Hotels[0].teps5 }}
+                </th>
+
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps6 === ''">
+                  {{ offer.Hotels[0].teps6 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps6 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps6 }}
+                </th>
+              </tr>
+              <tr>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps7 === ''">
+                  {{ offer.Hotels[0].teps7 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps7 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps7 }}
+                </th>
+
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps8 === ''">
+                  {{ offer.Hotels[0].teps8 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps8 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps8 }}
+                </th>
+              </tr>
+              <tr>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps9 === ''">
+                  {{ offer.Hotels[0].teps9 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps9 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps9 }}
+                </th>
+
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps10 === ''">
+                  {{ offer.Hotels[0].teps10 }}
+                </th>
+                <th style="text-align: right" *ngIf="offer.Hotels[0].teps10 != ''">
+                  <span style="margin-left: 10px">&#10004;</span>
+                  {{ offer.Hotels[0].teps10 }}
+                </th>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display: block; position: relative">
+            <p id="nam" style="direction: rtl; color: #488fa2">
+              السعر : {{ offer.Hotels[0].price }} ريال فقط .
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section size="A4" *ngFor="let imgg of offer.Hotels; let x = index">
+      <div class="sss pageThree" *ngIf="imgg.image1.length == 0">
+        <p style="padding-top: 10%; padding-bottom: 10%; direction: rtl">
+          صور منوعة للمنتجع ( {{ imgg.HotelName }} )
+        </p>
+        <img id="immg" [src]="sanitizeUrl(imgg.image_url)" />
+      </div>
+      <div class="sss pageThree" *ngIf="imgg.image1.length > 30">
+        <p style="padding-top: 10%; padding-bottom: 10%; direction: rtl">
+          صور منوعة للمنتجع ( {{ imgg.HotelName }} )
+        </p>
+        <img id="immg" src="{{ imgg.image1 }}" />
+      </div>
+    </section>
+  </div>
+</div>

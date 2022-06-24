@@ -1,0 +1,59 @@
+<div class="d-flex" id="wrapper" [ngClass]="toggleValue">
+  <!-- Sidebar-->
+  <div
+    class="bg-light border-right sticky-top h-100"
+    style="top: 3.5rem; z-index: 100"
+    id="sidebar-wrapper"
+  >
+    <div class="list-group list-group-flush">
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard"
+        (click)="sideBarToggleCheck()"
+        >All Offer</a
+      >
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/hotels"
+        (click)="sideBarToggleCheck()"
+        >Hotels</a
+      >
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/rooms"
+        (click)="sideBarToggleCheck()"
+        >Rooms</a
+      >
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/countries"
+        (click)="sideBarToggleCheck()"
+        >Countries</a
+      >
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/meals"
+        (click)="sideBarToggleCheck()"
+        >Meals</a
+      >
+
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/inclusions"
+        (click)="sideBarToggleCheck()"
+        >Inclusions</a
+      >
+      <a
+        class="list-group-item list-group-item-action bg-light"
+        routerLink="/dashboard/admin-settings"
+        *ngIf="showAdminNav"
+        (click)="sideBarToggleCheck()"
+        >Admin Setting</a
+      >
+    </div>
+  </div>
+  <!-- Page Content-->
+  <div id="page-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</div>

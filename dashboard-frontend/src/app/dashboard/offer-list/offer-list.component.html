@@ -1,0 +1,109 @@
+<div class="container">
+  <div *ngFor="let offer of offer_list" class="card w-75 my-3 mx-auto">
+    <div class="card-header d-flex justify-content-between">
+      <h5>{{ offer.name }}</h5>
+      <div>
+        <a [routerLink]="['/offers', offer.id]">
+          <button type="button" class="btn btn-primary">view</button></a
+        >
+        <a [routerLink]="['/edit-package', offer.id]">
+          <button type="button" class="btn btn-primary">Edit</button></a
+        >
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#myModal"
+          (click)="showModal(offer)"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table" *ngFor="let _offer of offer.Offers">
+          <thead>
+            <tr>
+              <th scope="col">HotelName</th>
+              <th scope="col">countryName</th>
+              <th scope="col">RegisterDate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Hotels of _offer.Hotels">
+              <td>{{ Hotels.HotelName }}</td>
+              <td>{{ Hotels.countryName }}</td>
+              <td>{{ Hotels.RegisterDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+<!-- test -->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Are You Sure Delete This Package</h4>
+        <button type="button" class="close" (click)="hideModal()">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h5 class="my-3 mx-auto text-center">{{ modal_data.name }}</h5>
+
+        <table class="table" *ngFor="let _offer of modal_data.Offers">
+          <thead>
+            <tr>
+              <th scope="col">HotelName</th>
+              <th scope="col">countryName</th>
+              <th scope="col">RegisterDate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Hotels of _offer.Hotels">
+              <td>{{ Hotels.HotelName }}</td>
+              <td>{{ Hotels.countryName }}</td>
+              <td>{{ Hotels.RegisterDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="delete_package()"
+        >
+          Yes
+        </button>
+        <button type="button" class="btn btn-danger" (click)="hideModal()">
+          Close
+        </button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button
+          type="button"
+          id="close-modal"
+          data-dismiss="modal"
+          style="display: none"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

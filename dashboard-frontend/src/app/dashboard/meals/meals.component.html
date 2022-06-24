@@ -1,0 +1,59 @@
+<div class="container rounded mx-auto bg-light p-3">
+  <!-- App title section -->
+  <div class="row m-1 p-2">
+    <div class="col">
+      <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+        <h3>Meal List</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Create todo section -->
+
+  <div class="row m-1 p-3">
+    <div class="col col-11 mx-auto">
+      <div
+        class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center"
+      >
+        <div class="col">
+          <input
+            class="form-control m-auto form-control-lg border-0 add-todo-input bg-transparent rounded"
+            type="text"
+            placeholder="Add new .."
+            (input)="valuechange($event)"
+            value="{{ input_country }}"
+          />
+        </div>
+
+        <div class="col-auto px-0 mx-0 mr-2">
+          <button type="button" class="btn btn-primary" (click)="addnewMeals()">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 mx-4 border-black-25 border-bottom"></div>
+  <div class="container w-75 my-3">
+    <ul class="list-group">
+      <li
+        *ngFor="let country of meals_list"
+        class="list-group-item list-group-item-action d-flex"
+      >
+        {{ country.name }}
+        <div class="row d-flex align-items-center justify-content-end ml-auto">
+          <h5
+            class="m-0 p-0 px-2"
+            data-toggle="tooltip"
+            title="Some tooltip text!"
+          >
+            <fa-icon
+              [icon]="trash_icon"
+              style="color: red"
+              (click)="remove_Meals(country._id)"
+            ></fa-icon>
+          </h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
